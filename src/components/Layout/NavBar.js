@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -6,9 +6,15 @@ import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import { FaShoppingCart } from "react-icons/fa";
 import Cart from "../Cart/Cart";
+import CartContext from "../../store/cart-context";
 
 function NavBar() {
+  const cartCtx = useContext(CartContext);
   const [open, setOpen] = useState(false);
+
+  const totalQuantity = cartCtx.items.reduce((total, item) => {
+    return total + item.quantity;
+  }, 0);
 
   const openCartHandler = () => {
     setOpen(true);
@@ -38,7 +44,7 @@ function NavBar() {
             <FaShoppingCart />
             <span className="mx-2">Cart</span>
             <Badge pill bg="warning" className="text-bg-warning">
-              0
+              {totalQuantity}
             </Badge>
           </Button>
         </Navbar.Collapse>
