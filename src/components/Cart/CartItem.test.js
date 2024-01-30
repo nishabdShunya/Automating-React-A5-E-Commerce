@@ -1,25 +1,31 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import CartItem from "./CartItem";
+import CartContext from "../../store/cart-context";
 
-const sampleCartItem = {
-  title: "Meddle",
-  price: 12,
-  imageSrc: "path/to/image.jpg",
-  quantity: 1,
-};
+test("Cart items are removed on click of remove button", () => {
+  const mockRemoveItem = jest.fn();
+  const item = {
+    id: 1,
+    title: "Product 1",
+    price: 10,
+    quantity: 2,
+    imageSrc: "image1.jpg",
+  };
 
-test("renders CartItem component correctly", () => {
   render(
-    <CartItem
-      title={sampleCartItem.title}
-      price={sampleCartItem.price}
-      imageSrc={sampleCartItem.imageSrc}
-      quantity={sampleCartItem.quantity}
-    />
+    <CartContext.Provider value={{ removeItem: mockRemoveItem }}>
+      <CartItem {...item} />
+    </CartContext.Provider>
   );
-  expect(screen.getByText("Meddle")).toBeInTheDocument();
-  expect(screen.getByText("$12")).toBeInTheDocument();
-  expect(screen.getByText("x 1")).toBeInTheDocument();
+
+  expect(screen.getByText(item.title)).toBeInTheDocument();
+  expect(screen.getByText(`$${item.price}`)).toBeInTheDocument();
+
+  const removeButton = screen.getByText("Remove");
+  expect(removeButton).toBeInTheDocument();
+
+  fireEvent.click(removeButton);
+  expect(mockRemoveItem).toHaveBeenCalledWith(item.id);
 });

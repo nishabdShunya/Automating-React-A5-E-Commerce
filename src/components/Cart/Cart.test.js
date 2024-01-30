@@ -1,25 +1,45 @@
 import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Cart from "./Cart";
+import CartContext from "../../store/cart-context";
 
-test("renders Cart component correctly", () => {
-  const dummyCloseHandler = jest.fn();
-  render(<Cart open={true} onCloseCart={dummyCloseHandler} />);
-  expect(screen.getByText("Meddle")).toBeInTheDocument();
-  expect(screen.getByText("Wallet")).toBeInTheDocument();
-});
+test("Cart component is rendered as expected with correct total amount", () => {
+  const items = [
+    {
+      id: 1,
+      title: "Product 1",
+      price: 10,
+      quantity: 2,
+      imageSrc: "image1.jpg",
+    },
+    {
+      id: 2,
+      title: "Product 2",
+      price: 15,
+      quantity: 3,
+      imageSrc: "image2.jpg",
+    },
+  ];
 
-test("calls onCloseCart when Close button is clicked", () => {
-  const dummyCloseHandler = jest.fn();
-  render(<Cart open={true} onCloseCart={dummyCloseHandler} />);
-  fireEvent.click(screen.getByText("Close"));
-  expect(dummyCloseHandler).toHaveBeenCalled();
-});
+  const totalAmount = items.reduce(
+    (total, item) => total + item.quantity * item.price,
+    0
+  );
 
-test("calls onCloseCart when Order button is clicked", () => {
-  const dummyCloseHandler = jest.fn();
-  render(<Cart open={true} onCloseCart={dummyCloseHandler} />);
-  fireEvent.click(screen.getByText("Order"));
-  expect(dummyCloseHandler).toHaveBeenCalled();
+  render(
+    <CartContext.Provider value={{ items }}>
+      <Cart open={true} onCloseCart={() => {}} />
+    </CartContext.Provider>
+  );
+
+  expect(screen.getByText(`Total: $${totalAmount}`)).toBeInTheDocument();
+
+  items.forEach((item) => {
+    expect(screen.getByText(item.title)).toBeInTheDocument();
+    expect(screen.getByText(`$${item.price}`)).toBeInTheDocument();
+  });
+
+  expect(screen.getByText("Close")).toBeInTheDocument();
+  expect(screen.getByText("Order")).toBeInTheDocument();
 });

@@ -19,7 +19,7 @@ function NavBar() {
   };
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="bg-body-tertiary" sticky="top">
       <Cart open={open} onCloseCart={closeCartHandler} />
       <Container>
         <Navbar.Brand href="#home">Pink Floyd</Navbar.Brand>

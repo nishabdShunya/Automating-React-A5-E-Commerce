@@ -2,6 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Container from "react-bootstrap/Container";
+import { Stack } from "react-bootstrap";
 import meddle from "../../assets/meddle.jpg";
 import wallet from "../../assets/pf_wallet.jpg";
 import CartItem from "./CartItem";
@@ -45,12 +46,17 @@ const Cart = (props) => {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="outline-secondary" onClick={props.onCloseCart}>
-          Close
-        </Button>
-        <Button variant="warning" onClick={props.onCloseCart}>
-          Order
-        </Button>
+        <div>
+          <h5 className="text-end">Total: $0</h5>
+          <Stack direction="horizontal" gap={1}>
+            <Button variant="outline-secondary" onClick={props.onCloseCart}>
+              Close
+            </Button>
+            <Button variant="warning" onClick={props.onCloseCart}>
+              Order
+            </Button>
+          </Stack>
+        </div>
       </Modal.Footer>
     </Modal>
   );
