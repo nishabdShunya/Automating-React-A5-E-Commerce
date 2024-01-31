@@ -1,3 +1,6 @@
+import React from "react";
+import { Table, Button } from "react-bootstrap";
+
 const DUMMY_TOURS = [
   {
     id: "t1",
@@ -36,3 +39,29 @@ const DUMMY_TOURS = [
     state: "Concord, CA",
   },
 ];
+
+const Tours = () => {
+  return (
+    <div className="m-5 d-flex flex-column align-items-center">
+      <h2 className="text-center">TOURS</h2>
+      <Table className="my-5 w-75">
+        <tbody>
+          {DUMMY_TOURS.map((tour) => {
+            return (
+              <tr key={tour.id}>
+                <td>{tour.date}</td>
+                <td>{tour.state}</td>
+                <td>{tour.location}</td>
+                <td className="text-end">
+                  <Button variant="warning">Buy Tickets</Button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
+    </div>
+  );
+};
+
+export default Tours;
