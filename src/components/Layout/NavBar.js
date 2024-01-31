@@ -32,8 +32,8 @@ function NavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#about">About</Nav.Link>
-            <Nav.Link href="#products">Products</Nav.Link>
+            <Nav.Link href="http://localhost:3000/">About</Nav.Link>
+            <Nav.Link href="http://localhost:3000/products">Products</Nav.Link>
             <Nav.Link href="#tours">Tours</Nav.Link>
           </Nav>
           <Button
