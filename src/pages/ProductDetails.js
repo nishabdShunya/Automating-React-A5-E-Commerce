@@ -1,11 +1,12 @@
 import React from "react";
-import { useParams, Outlet, Link } from "react-router-dom";
+import { useParams, Outlet, Link, useLocation } from "react-router-dom";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import ProductInfo from "../components/ProductDetails/ProductInfo";
 import RecommendedProducts from "../components/ProductDetails/RecommendedProducts";
 import { ALL_PRODUCTS } from "../constants";
 
 const ProductDetails = () => {
+  const location = useLocation();
   const params = useParams();
   const product = ALL_PRODUCTS.find((p) => p.id === params.productId);
   const otherProducts = ALL_PRODUCTS.filter((p) => p.id !== params.productId);
@@ -25,12 +26,14 @@ const ProductDetails = () => {
       </Row>
       <Row className="pt-3">
         <Col>
-          <Link
-            to={`/products/${product.id}/reviews`}
-            className="text-decoration-none bg-dark text-light p-2 rounded"
-          >
-            See Reviews
-          </Link>
+          {location.pathname === `/products/${product.id}` && (
+            <Link
+              to={`/products/${product.id}/reviews`}
+              className="text-decoration-none bg-dark text-light p-2 rounded"
+            >
+              See Customer Reviews
+            </Link>
+          )}
           <Outlet />
         </Col>
       </Row>
