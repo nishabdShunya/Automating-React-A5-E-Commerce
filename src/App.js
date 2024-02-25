@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import RootLayout from "./components/Layout/RootLayout";
 import About from "./components/About/About";
 import Products from "./components/Products/Products";
@@ -7,22 +7,17 @@ import Tours from "./components/Tours/Tours";
 import Contact from "./components/Contact/Contact";
 import CartContextProvider from "./store/CartContextProvider";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <RootLayout />,
-    children: [
-      { path: "/", element: <About /> },
-      { path: "/products", element: <Products /> },
-      { path: "/tours", element: <Tours /> },
-      { path: "/contact", element: <Contact /> },
-    ],
-  },
-]);
 function App() {
   return (
     <CartContextProvider>
-      <RouterProvider router={router} />
+      <Routes>
+        <Route path="/" element={<RootLayout />}>
+          <Route path="/" element={<About />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/tours" element={<Tours />} />
+          <Route path="/contact" element={<Contact />} />
+        </Route>
+      </Routes>
     </CartContextProvider>
   );
 }
