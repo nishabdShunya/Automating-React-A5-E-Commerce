@@ -6,6 +6,7 @@ import Products from "./pages/Products";
 import Tours from "./pages/Tours";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import ProductDetails from "./pages/ProductDetails";
 import CartContextProvider from "./store/CartContextProvider";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Navigate to="/about" />} />
           <Route path="/about" element={<About />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/products/:productId" element={<ProductDetails />} />
           <Route path="/tours" element={<Tours />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />

@@ -3,30 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import MerchItem from "./MerchItem";
-import tshirt from "../../assets/pf_tshirt.jpg";
-import coffeeMug from "../../assets/pf_coffee_mug.png";
-import wallet from "../../assets/pf_wallet.jpg";
-
-const DUMMY_MERCHANDISE = [
-  {
-    id: "m1",
-    title: "T-Shirt",
-    price: 15,
-    imageSrc: tshirt,
-  },
-  {
-    id: "m2",
-    title: "Coffee Mug",
-    price: 7,
-    imageSrc: coffeeMug,
-  },
-  {
-    id: "m3",
-    title: "Wallet",
-    price: 11,
-    imageSrc: wallet,
-  },
-];
+import { DUMMY_MERCHANDISE } from "../../constants";
 
 const Merchandise = () => {
   return (
