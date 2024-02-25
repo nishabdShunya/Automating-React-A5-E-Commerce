@@ -1,9 +1,8 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Outlet, Link } from "react-router-dom";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import ProductInfo from "../components/ProductDetails/ProductInfo";
 import RecommendedProducts from "../components/ProductDetails/RecommendedProducts";
-import CustomerReviews from "../components/ProductDetails/CustomerReviews";
 import { ALL_PRODUCTS } from "../constants";
 
 const ProductDetails = () => {
@@ -26,7 +25,13 @@ const ProductDetails = () => {
       </Row>
       <Row className="pt-3">
         <Col>
-          <CustomerReviews />
+          <Link
+            to={`/products/${product.id}/reviews`}
+            className="text-decoration-none bg-dark text-light p-2 rounded"
+          >
+            See Reviews
+          </Link>
+          <Outlet />
         </Col>
       </Row>
     </Container>

@@ -1,11 +1,17 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { DUMMY_CUSTOMER_REVIEWS } from "../../constants";
 
 const CustomerReviews = () => {
   return (
     <Fragment>
-      <h4>Customer Reviews</h4>
+      <div className="d-flex justify-content-between align-items-center">
+        <h4 className="m-0">Customer Reviews</h4>
+        <Link to=".." className="text-decoration-none text-danger fs-1">
+          &times;
+        </Link>
+      </div>
       <Container>
         {DUMMY_CUSTOMER_REVIEWS.map((r) => (
           <Row
