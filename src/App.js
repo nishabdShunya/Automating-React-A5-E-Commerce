@@ -5,6 +5,7 @@ import About from "./pages/About";
 import Products from "./pages/Products";
 import Tours from "./pages/Tours";
 import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
 import CartContextProvider from "./store/CartContextProvider";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/tours" element={<Tours />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </CartContextProvider>
