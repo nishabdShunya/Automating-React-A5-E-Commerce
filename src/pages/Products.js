@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
-import Albums from "./Albums";
-import Merchandise from "./Merchandise";
+import Albums from "../components/Products/Albums";
+import Merchandise from "../components/Products/Merchandise";
 
 const Products = () => {
   return (

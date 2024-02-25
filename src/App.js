@@ -1,10 +1,10 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
-import RootLayout from "./components/Layout/RootLayout";
-import About from "./components/About/About";
-import Products from "./components/Products/Products";
-import Tours from "./components/Tours/Tours";
-import Contact from "./components/Contact/Contact";
+import { Routes, Route, Navigate } from "react-router-dom";
+import RootLayout from "./pages/RootLayout";
+import About from "./pages/About";
+import Products from "./pages/Products";
+import Tours from "./pages/Tours";
+import Contact from "./pages/Contact";
 import CartContextProvider from "./store/CartContextProvider";
 
 function App() {
@@ -12,7 +12,8 @@ function App() {
     <CartContextProvider>
       <Routes>
         <Route path="/" element={<RootLayout />}>
-          <Route path="/" element={<About />} />
+          <Route path="/" element={<Navigate to="/about" />} />
+          <Route path="/about" element={<About />} />
           <Route path="/products" element={<Products />} />
           <Route path="/tours" element={<Tours />} />
           <Route path="/contact" element={<Contact />} />
