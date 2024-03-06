@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import RootLayout from "./pages/RootLayout";
 import About from "./pages/About";
+import AuthForm from "./pages/AuthForm";
 import Products from "./pages/Products";
 import Tours from "./pages/Tours";
 import Contact from "./pages/Contact";
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<RootLayout />}>
           <Route path="/" element={<Navigate to="/about" />} />
           <Route path="/about" element={<About />} />
+          <Route path="/auth" element={<AuthForm />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:productId" element={<ProductDetails />}>
             <Route path="reviews" element={<CustomerReviews />} />

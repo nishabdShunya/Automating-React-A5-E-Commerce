@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -8,9 +8,12 @@ import Badge from "react-bootstrap/Badge";
 import { FaShoppingCart } from "react-icons/fa";
 import Cart from "../Cart/Cart";
 import CartContext from "../../store/cart-context";
+import AuthContext from "../../store/auth-context";
 
 function NavBar() {
+  const navigate = useNavigate();
   const cartCtx = useContext(CartContext);
+  const authCtx = useContext(AuthContext);
   const [open, setOpen] = useState(false);
 
   const totalQuantity = cartCtx.items.reduce((total, item) => {
@@ -23,6 +26,15 @@ function NavBar() {
 
   const closeCartHandler = () => {
     setOpen(false);
+  };
+
+  const loginClickHandler = () => {
+    navigate("/auth");
+  };
+
+  const logoutClickHandler = () => {
+    authCtx.logout();
+    navigate("/auth");
   };
 
   return (
@@ -76,7 +88,7 @@ function NavBar() {
           </Nav>
           <Button
             variant="dark"
-            className="d-flex align-items-center"
+            className="d-flex align-items-center me-3"
             onClick={openCartHandler}
           >
             <FaShoppingCart />
@@ -84,6 +96,14 @@ function NavBar() {
             <Badge pill bg="warning" className="text-bg-warning">
               {totalQuantity}
             </Badge>
+          </Button>
+          <Button
+            onClick={
+              authCtx.isLoggedIn ? logoutClickHandler : loginClickHandler
+            }
+            variant={authCtx.isLoggedIn ? "danger" : "primary"}
+          >
+            {authCtx.isLoggedIn ? "Logout" : "Login"}
           </Button>
         </Navbar.Collapse>
       </Container>
