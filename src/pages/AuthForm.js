@@ -39,7 +39,7 @@ function AuthForm() {
         throw new Error(errorData.error.message);
       }
       const data = await response.json();
-      authCtx.login(data.idToken);
+      authCtx.login(data.idToken, data.email);
       navigate("/products");
     } catch (error) {
       alert(error.message);
